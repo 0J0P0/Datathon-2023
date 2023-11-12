@@ -49,8 +49,6 @@ def main():
 
             while more_cloth:
                 it += 1
-                print(it)
-                print(dic_reg)
                 if it > 1:
                     while dic_reg['next_cloth'+str(it-1)] == "":
                         sleep(1)
@@ -99,6 +97,7 @@ def main():
                                     more_cloth = False
                                 elif dic_reg['next_cloth'+str(it)] == "Yes":
                                     more_cloth = True
+        print(outfit)
 
 
 
@@ -110,25 +109,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
