@@ -210,26 +210,16 @@ def get_complementary_products(product: str, sim_products: list, desired_type: s
         List of complementary products of the given type.
     """
 
-    complementary_products = []
+    complementary_prod = []
+
     for p in sim_products:
         p_pst_list = pst_list[p]['related_products']
 
         for p2 in p_pst_list:
-            p2_type = pst_list[p2]['type']
-            if p2_type == desired_type:
-                complementary_products.append(p)
+            if pst_list[p2]['type'] == desired_type:
+                complementary_prod.append(p2)
 
-    if len(complementary_products) < min_products:
-        print(f'Not enough complementary products for {desired_type}. Getting more...')
-        
-        # row = products[products['des_filename'] == product]
-        # p_type = row['des_product_type'].values[0]
-        complementary_products, _ = zip(*get_all_similar(product, desired_type))
+    if len(complementary_prod) < min_products:
+        complementary_prod, _ = zip(*get_all_similar(product, desired_type))
 
-        # for p in similar_products:
-        #     comp = get_nth_level_products(p, desired_type, pst_list)
-        #     for p2 in comp:
-        #         if p2 not in complementary_products:
-        #             complementary_products.append(p2)
-
-    return complementary_products
+    return complementary_prod
