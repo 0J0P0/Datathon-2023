@@ -50,7 +50,6 @@ def main():
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         product = get_product[uploaded_file.name]
-        print(product)
         st.image(image, caption=f"{product[2]}", use_column_width=False)
         outfit = ["datathon/images/"+uploaded_file.name]
 
