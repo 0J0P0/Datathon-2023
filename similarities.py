@@ -4,12 +4,11 @@ from vgg16 import compute_image_features
 from keras.preprocessing import image
 from sklearn.metrics.pairwise import cosine_similarity
 
+data_path = 'data/'
+image_path = 'datathon/images/'
 
-repository = 'Datathon-2023/'
-image_path = repository + 'datathon/images/'
-
-products = pd.read_csv(repository + 'products_clean.csv')
-outfits = pd.read_csv(repository + 'datathon/dataset/outfit_data.csv')
+products = pd.read_csv(data_path + 'products_clean.csv')
+outfits = pd.read_csv('datathon/dataset/outfit_data.csv')
 
 
 features_df = compute_image_features()
@@ -56,8 +55,8 @@ def img_similarity(image1: str, image2: str, show: bool = False) -> float:
         Cosine similarity between the two images.
     """
 
-    img1 = image.load_img(repository + image1)
-    img2 = image.load_img(repository + image2)
+    img1 = image.load_img(image1)
+    img2 = image.load_img(image2)
 
     if show:
         display(img1, img2)
@@ -69,7 +68,6 @@ def img_similarity(image1: str, image2: str, show: bool = False) -> float:
     features2 = features_df.loc[image2].values.reshape(1, -1)
 
     similarity = cosine_similarity(features1, features2)
-
     return similarity[0][0]
 
 

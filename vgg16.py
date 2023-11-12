@@ -7,14 +7,14 @@ from torchvision.models import vgg16
 import torchvision.transforms as transforms
 
 
-repository = 'Datathon-2023/'
-image_path = repository + 'datathon/images/'
+data_path = 'data/'
+image_path = 'datathon/images/'
 
-products = pd.read_csv(repository + 'products_clean.csv')
-outfits = pd.read_csv(repository + 'datathon/dataset/outfit_data.csv')
+products = pd.read_csv(data_path + 'products_clean.csv')
+outfits = pd.read_csv('datathon/dataset/outfit_data.csv')
 
 
-if not os.path.exists(repository + 'image_features.csv'):
+if not os.path.exists(data_path + 'image_features.csv'):
     # Load pre-trained VGG model
     model = vgg16(pretrained=True)
     # Remove the classification layer (fc) for feature extraction
@@ -81,8 +81,8 @@ def compute_image_features():
     """
 
     # if image_features.csv exists, load it and return it
-    if os.path.exists(repository + 'image_features.csv'):
-        return pd.read_csv(repository + 'image_features.csv', index_col=0)
+    if os.path.exists(data_path + 'image_features.csv'):
+        return pd.read_csv(data_path + 'image_features.csv', index_col=0)
 
     # Get a list of all the image files in the directory
     image_files = [f for f in os.listdir(image_path) if os.path.isfile(os.path.join(image_path, f))]
@@ -100,6 +100,6 @@ def compute_image_features():
     features_df = pd.DataFrame.from_dict(features_dict, orient='index')
 
     # Save the features to a file
-    features_df.to_csv(repository + 'image_features.csv')
+    features_df.to_csv(data_path + 'image_features.csv')
 
     return features_df

@@ -1,12 +1,11 @@
 import os
 import pandas as pd
 
+data_path = 'data/'
+image_path = 'datathon/images/'
 
-repository = 'Datathon-2023/'
-image_path = repository + 'datathon/images/'
-
-products = pd.read_csv(repository + 'products_clean.csv')
-outfits = pd.read_csv(repository + 'datathon/dataset/outfit_data.csv')
+products = pd.read_csv(data_path + 'products_clean.csv')
+outfits = pd.read_csv('datathon/dataset/outfit_data.csv')
 
 
 def get_pst_list(outfit_data: pd.DataFrame, product_data: pd.DataFrame):
@@ -27,8 +26,8 @@ def get_pst_list(outfit_data: pd.DataFrame, product_data: pd.DataFrame):
     """
 
     # if product_pst_list.csv exists, load it and return it
-    if os.path.exists(repository + 'product_pst_list.csv'):
-        df = pd.read_csv(repository + 'product_pst_list.csv')
+    if os.path.exists(data_path + 'product_pst_list.csv'):
+        df = pd.read_csv(data_path + 'product_pst_list.csv')
         product_pst_list = {}
         for _, row in df.iterrows():
             product_id = row['productid']
@@ -75,5 +74,5 @@ def get_pst_list(outfit_data: pd.DataFrame, product_data: pd.DataFrame):
     })
 
     # Save the DataFrame to a file
-    df.to_csv(repository + 'product_pst_list.csv')
+    df.to_csv(data_path + 'product_pst_list.csv')
     return product_pst_list

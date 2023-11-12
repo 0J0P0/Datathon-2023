@@ -1,2 +1,4 @@
 .DS_Store
 datathon/images/*
+data/image_features.csv
+__pycache__/
